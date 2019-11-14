@@ -18,7 +18,7 @@ def smooth_point():
     dac = DAC8568(baud_rate=100000)
     while True:
         for y in Y:
-            dac._write(dac._make_word(command="WRITE_AND_UPDATE", channel="A", value=float(y)))
+            dac.write_and_update(channel="A", value=float(y))
 
 if __name__=='__main__':
     smooth_point()
