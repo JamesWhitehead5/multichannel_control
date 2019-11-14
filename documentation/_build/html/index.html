@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Welcome to Thermal tuning control for integrated optical cavities’s documentation! &#8212; Thermal tuning control for integrated optical cavities 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="welcome-to-thermal-tuning-control-for-integrated-optical-cavities-s-documentation">
+<h1>Welcome to Thermal tuning control for integrated optical cavities’s documentation!<a class="headerlink" href="#welcome-to-thermal-tuning-control-for-integrated-optical-cavities-s-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<span class="target" id="module-DAC8568"></span><dl class="class">
+<dt id="DAC8568.DAC8568">
+<em class="property">class </em><code class="sig-prename descclassname">DAC8568.</code><code class="sig-name descname">DAC8568</code><span class="sig-paren">(</span><em class="sig-param">baud_rate: int</em><span class="sig-paren">)</span><a class="headerlink" href="#DAC8568.DAC8568" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to interface with the DAC8568 8 channel digital-to-analog converter via the FT232H controller.</p>
+<dl class="method">
+<dt id="DAC8568.DAC8568.clear_all_to_full">
+<code class="sig-name descname">clear_all_to_full</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#DAC8568.DAC8568.clear_all_to_full" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets all output registers to their maximum value</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="DAC8568.DAC8568.clear_all_to_mid">
+<code class="sig-name descname">clear_all_to_mid</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#DAC8568.DAC8568.clear_all_to_mid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets all output registers to half way between 0 and maximum</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="DAC8568.DAC8568.clear_all_to_zero">
+<code class="sig-name descname">clear_all_to_zero</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#DAC8568.DAC8568.clear_all_to_zero" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets all outputs registers to 0</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="DAC8568.DAC8568.internal_reference_on">
+<code class="sig-name descname">internal_reference_on</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#DAC8568.DAC8568.internal_reference_on" title="Permalink to this definition">¶</a></dt>
+<dd><p>Turns the internal reference on (2.5V). There should be not external reference connected when this occurs
+or it may damage the board</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="DAC8568.DAC8568.power_up_dac">
+<code class="sig-name descname">power_up_dac</code><span class="sig-paren">(</span><em class="sig-param">channels: list</em><span class="sig-paren">)</span><a class="headerlink" href="#DAC8568.DAC8568.power_up_dac" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="DAC8568.DAC8568.software_reset">
+<code class="sig-name descname">software_reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#DAC8568.DAC8568.software_reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resets the software in the DAC</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="DAC8568.DAC8568.to_bytes">
+<em class="property">static </em><code class="sig-name descname">to_bytes</code><span class="sig-paren">(</span><em class="sig-param">word: int</em><span class="sig-paren">)</span> &#x2192; bytearray<a class="headerlink" href="#DAC8568.DAC8568.to_bytes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts an integer to an array of 8-bit bytes with length 4 that can be processed by busio.SPI write
+for the Ti DA8568</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>word</strong> – Integer with 32 bits. Raises assertion error when more significant bits are present</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A length 4 array of 8-bits bytes that represent the value of word</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="DAC8568.DAC8568.update_channel">
+<code class="sig-name descname">update_channel</code><span class="sig-paren">(</span><em class="sig-param">channel: str</em><span class="sig-paren">)</span><a class="headerlink" href="#DAC8568.DAC8568.update_channel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes the value in the buffer for the selected channel and loads it</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>channel</strong> – The character that represents the output that you want to change. Ex. “A” or “H”.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="DAC8568.DAC8568.write_and_update">
+<code class="sig-name descname">write_and_update</code><span class="sig-paren">(</span><em class="sig-param">channel: str</em>, <em class="sig-param">value: float</em><span class="sig-paren">)</span><a class="headerlink" href="#DAC8568.DAC8568.write_and_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads a value to the buffer and update the output for the selected channel</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>channel</strong> – The character that represents the output that you want to change. Ex. “A” or “H”.</p></li>
+<li><p><strong>value</strong> – A value between 0 (inclusive) and 1(inclusive) that outputs a value proportional to the reference
+voltage</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="DAC8568.DAC8568.write_and_update_all">
+<code class="sig-name descname">write_and_update_all</code><span class="sig-paren">(</span><em class="sig-param">channel: str</em>, <em class="sig-param">value: float</em><span class="sig-paren">)</span><a class="headerlink" href="#DAC8568.DAC8568.write_and_update_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads a value to the buffer and update the outputs for all channels</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>channel</strong> – The character that represents the output that you want to change. Ex. “A” or “H”.</p></li>
+<li><p><strong>value</strong> – A value between 0 (inclusive) and 1(inclusive) that outputs a value proportional to the reference
+voltage</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="DAC8568.DAC8568.write_to_ldac_register">
+<code class="sig-name descname">write_to_ldac_register</code><span class="sig-paren">(</span><em class="sig-param">channels: list</em><span class="sig-paren">)</span><a class="headerlink" href="#DAC8568.DAC8568.write_to_ldac_register" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="DAC8568.DAC8568.write_to_register">
+<code class="sig-name descname">write_to_register</code><span class="sig-paren">(</span><em class="sig-param">channel: str</em>, <em class="sig-param">value: float</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#DAC8568.DAC8568.write_to_register" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads a value to the buffer but doesn’t update the output</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>channel</strong> – The character that represents the output that you want to change. Ex. “A” or “H”.</p></li>
+<li><p><strong>value</strong> – A value between 0 (inclusive) and 1(inclusive) that outputs a value proportional to the reference
+voltage</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">Thermal tuning control for integrated optical cavities</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, James Whitehead.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
