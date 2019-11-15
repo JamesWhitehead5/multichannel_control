@@ -1,40 +1,51 @@
 import visa, time, math, sys
 import numpy as np
+from typing import List, Tuple
 
+class TSL510:
+    """
+    This class provides a simple interface with the TSL-510 Laser. It creates an
+    object that consists of setters and getters for the source.
+    Most methods in  Laser require the Laser Diode to be turned on in order to work.
+    After turning the power on or the LD output off, it is recommended that you
+    wait at least 30 seconds before turning on LD output.
+    While the LD light is blinking, communication is not possible.
+    Additional methods should be added in the future to allow for greater
+    functionality
+    Methods with a preceding '_' are considered private and should not be used
+    outside of the class since they may be depreciated or modified in the future
+    """
+    inst = None  # VISA resource manager instance for Laser
 
-# This class provides a simple interface with the TSL-510 Laser. It creates an
-# object that consists of setters and getters for the source.
-# Most methods in  Laser require the Laser Diode to be turned on in order to work.
-# After turning the power on or the LD output off, it is recommended that you
-# wait at least 30 seconds before turning on LD output.
-# While the LD light is blinking, communication is not possible.
-# Additonal methods should be added in the future to allow for greater
-# functionality
-# Methods with a preceding '_' are considered private and should not be used
-# outside of the class since they may be depreciated or modified in the future
-class Laser:
-
-    # Constructor finds and connects to the VISA resource with name in ID string
-    # Prints conformation to STDOUT.
-    # Raises exception if cannot connect
     def __init__(self):
-        self.inst = None  # VISA resource manager instance for Laser
+        """Constructor finds and connects to the VISA resource with name in ID string
+        Prints confirmation to STDOUT.
+        Raises exception if cannot connect
+        """
+
         rm = visa.ResourceManager()
+        target = 'TSL-510'
+
         for dev in rm.list_resources():
             try:
                 inst = rm.open_resource(dev)
                 name = inst.query('*IDN?')
-                if 'TSL-510' in name:
+                if target in name:
                     self.inst = inst
-            except:  # gotta find out the specific exception that is thrown
+            except:
                 continue
+
         if self.inst is None:
-            raise Exception('Can\'t connect to TSL-510 LASER')
+            raise RuntimeError("Target resource {} cannot be found in the VISA resource manager".format(target))
         print("Connected to " + self.inst.query('*IDN?'))
 
-    # Queries the device and returns some, but not all, human readable status
-    # values for general information and debuging purposes
-    def status(self):
+    def status(self) -> None:
+        """
+        Queries the device and returns some, but not all, human readable status
+        values for general information and debugging purposes
+        :return:
+        """
+
         str = ""
         str += "Laser Diode Status (0:OFF, 1:ON):            " + self.inst.query(':POW:STAT?')
         str += "Power Attenuation (0:Manual, 1:Auto):        " + self.inst.query(':POW:ATT:AUT?')
@@ -44,57 +55,85 @@ class Laser:
         # And on and on...
         return str
 
-    # a "private" helper class. Raises exception if num in neither 0 nor 1
-    def _zero_or_one(self, num):
-        if not (num == 0 or num == 1):
-            raise Exception('Invalid input: ' + str(num))  # throw a better exception
+    @staticmethod
+    def _bool_to_int(value: bool) -> int:
+        """
+        Maps a boolean false to an integer 0 and a boolean tru to an integer 1
+        :param value:
+        :return:
+        """
+        if value:
+            return int(1)
+        else:
+            return int(0)
 
-    # Wavelength field can either represent the wavelength(in nm) or the
-    # frequency(in THz). Parameter num can either be 0 or 1.(0:nm, 1:THz)
-    # Raises exception if num is out of range
-    def set_wavelength_unit(self, num):
-        self._zero_or_one(num)
-        self.inst.write(':WAV:UNIT ' + str(num))
+    def set_wavelength_unit(self, unit: bool) -> None:
+        """
+        Wavelength field can either represent the wavelength(in nm) or the
+        frequency(in THz). Parameter num can either be 0 or 1.(0:nm, 1:THz)
+        Raises exception if num is out of range
 
-    # Sets wavelength of the laser. Units of wl depend on what has been set
-    def set_wavelength(self, wl):
-        self.inst.write(':WAV ' + str(wl))
+        :param unit: If unit is false, the unit is set to nanometers. If true, TeraHertz
+        :return:
+        """
+        self.inst.write(':WAV:UNIT ' + self._bool_to_int(unit))
 
-    # Power field can have units dBm (dBmW) or just mW. The parameter num can be
-    # either 0 or 1.(0:dBm, 1:mW)
-    # Raises exception if num is out of range
-    def set_power_unit(self, num):
-        self._zero_or_one(num)
-        self.inst.write(':POW:UNIT ' + str(num))
+    def set_color(self, color: float) -> None:
+        """
+        Sets the color of light coming out of the laser.
 
-    # Sets laser power in units previously set
-    def set_power(self, power):
+        :param color: The color of light coming out of the laser. Units are either nanometers or THz,
+        depending on what has been set beforehand.
+        :return:
+        """
+        self.inst.write(':WAV ' + str(color))
+
+    def set_power_unit(self, value) -> None:
+        """
+        Sets the power unit for the laser. Power field can have units dBm (dBmW) or just mW.
+
+        :param value: If false, the power units are dBm. If true, mW.
+        :return:
+        """
+        self.inst.write(':POW:UNIT ' + str(self._bool_to_int(value)))
+
+    def set_power(self, power) -> None:
+        """
+        Sets laser power in units set beforehand
+        :param power: Power in either dBm or mW.
+        :return:
+        """
         self.inst.write(':POW ' + str(power))
 
-    # Uses internal power meter to measure acctual power outpt(at source). Returns
-    # a float of output power
-    def get_power_true(self):
+    def get_power_true(self) -> float:
+        """
+        Uses power meter inside of laser to measure actual power output(at source)
+
+        :return: Measured power in system units (dBm or mW)
+        """
         return float(self.inst.query(':POW:ACT?'))
 
-    # gives a range of power. I don't know what this means: maybe attainable power
-    # range or stable power range? May be constant or vary w/
-    # temperature, wavelength, etc.
-    # returns a 2 element list of floats [min, max]
-    def get_range_power(self):
-        return [float(self.inst.query(':POW:LEV:MIN?')), float(self.inst.query(':POW:LEV:MAX?'))]
+    def get_range_power(self) -> (float, float):
+        """
+        Gives a range of power. I don't know what this means: maybe attainable power
+        range or stable power range? May be constant or vary w/
+        temperature, wavelength, etc.
 
-    # Not well documented function(see get_range_power)
-    # returns a 2 element list of floats [min, max]
-    def get_range_wavelength(self):
-        return [float(self.inst.query(':WAV:MIN?')), float(self.inst.query(':WAV:MAX?'))]
+        :return: a 2 element tuple of floats (min, max)
+        """
+        return float(self.inst.query(':POW:LEV:MIN?')), float(self.inst.query(':POW:LEV:MAX?'))
 
-    # turns on the Laser Diode (LD)
-    # After turning the power on or the LD off, it is recommended that you
-    # wait at least 30 seconds before turning on the LD.
-    # def LD_on(self):
-    #   self.inst.write(':POW:STAT 1')
-    # Depreciated. Is easy to change manually and may cause damage to laser
+    def get_range_wavelength(self) -> (float, float):
+        """
+        Not well documented function (see get_range_power)
+        returns
+        :return: a 2 element tuple of floats (min, max)
+        """
+        return float(self.inst.query(':WAV:MIN?')), float(self.inst.query(':WAV:MAX?'))
 
-    # turns off the Laser Diode (LD)
-    def LD_off(self):
+    def ld_off(self) -> None:
+        """
+        Turns off the Laser Diode (LD)
+        :return:
+        """
         self.inst.write(':POW:STAT 0')
