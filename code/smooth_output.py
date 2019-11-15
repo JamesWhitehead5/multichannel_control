@@ -3,7 +3,7 @@
 
 
 import numpy as np
-from code.DAC8568 import DAC8568
+from code.powerSource import DAC8568
 
 def generate_points():
     n = 1000

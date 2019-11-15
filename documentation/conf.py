@@ -17,7 +17,7 @@ sys.path.insert(0, os.path.abspath('../code'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'Thermal tuning control for integrated optical cavities'
+project = 'Thermal tuning control'
 copyright = '2019, James Whitehead'
 author = 'James Whitehead'
 

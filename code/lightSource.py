@@ -83,12 +83,12 @@ class TSL510:
         Sets the color of light coming out of the laser.
 
         :param color: The color of light coming out of the laser. Units are either nanometers or THz,
-        depending on what has been set beforehand.
+            depending on what has been set beforehand.
         :return:
         """
         self.inst.write(':WAV ' + str(color))
 
-    def set_power_unit(self, value) -> None:
+    def set_power_unit(self, value: bool) -> None:
         """
         Sets the power unit for the laser. Power field can have units dBm (dBmW) or just mW.
 
@@ -97,7 +97,7 @@ class TSL510:
         """
         self.inst.write(':POW:UNIT ' + str(self._bool_to_int(value)))
 
-    def set_power(self, power) -> None:
+    def set_power(self, power: float) -> None:
         """
         Sets laser power in units set beforehand
         :param power: Power in either dBm or mW.

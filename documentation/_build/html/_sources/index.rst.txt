@@ -10,8 +10,12 @@ Welcome to Thermal tuning control for integrated optical cavities's documentatio
    :maxdepth: 2
    :caption: Contents:
 
-.. automodule:: DAC8568
+.. automodule:: powerSource
    :members:
+
+.. automodule:: lightSource
+   :members:
+
 
 Indices and tables
 ==================
