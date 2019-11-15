@@ -154,6 +154,13 @@
 <dt id="powerSource.DAC8568">
 <em class="property">class </em><code class="sig-prename descclassname">powerSource.</code><code class="sig-name descname">DAC8568</code><span class="sig-paren">(</span><em class="sig-param">baud_rate: int</em><span class="sig-paren">)</span><a class="headerlink" href="#powerSource.DAC8568" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class to interface with the DAC8568 8 channel digital-to-analog converter via the FT232H controller.</p>
+<p>Initializes the connection with the microcontroller board. Takes control of pins D0, D1, D3 on the board.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>baud_rate</strong> – Rate that data is sent from the controller to the DAC. The maximum rate for the DAC is
+50MHz but the interface board can’t get that fast.</p>
+</dd>
+</dl>
 <dl class="method">
 <dt id="powerSource.DAC8568.clear_all_to_full">
 <code class="sig-name descname">clear_all_to_full</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#powerSource.DAC8568.clear_all_to_full" title="Permalink to this definition">¶</a></dt>
@@ -175,7 +182,7 @@
 <dl class="method">
 <dt id="powerSource.DAC8568.internal_reference_on">
 <code class="sig-name descname">internal_reference_on</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#powerSource.DAC8568.internal_reference_on" title="Permalink to this definition">¶</a></dt>
-<dd><p>Turns the internal reference on (2.5V). There should be not external reference connected when this occurs
+<dd><p>Turns the internal reference on (2.5V). There should be no external reference connected when this occurs
 or it may damage the board</p>
 </dd></dl>
 
@@ -277,10 +284,13 @@ Most methods require the Laser Diode to be turned on in order to work.
 After turning the power on or the LD output off, it is recommended that you
 wait at least 30 seconds before turning on LD output.
 While the LD light is blinking, communication is not possible.</p>
+<p>Constructor finds and connects to the VISA resource with name in ID string
+Prints confirmation to STDOUT.
+Raises exception if cannot connect</p>
 <dl class="method">
 <dt id="lightSource.TSL510.get_power_true">
 <code class="sig-name descname">get_power_true</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#lightSource.TSL510.get_power_true" title="Permalink to this definition">¶</a></dt>
-<dd><p>Uses power meter inside of laser to measure actual power output(at source)</p>
+<dd><p>Uses power meter inside of laser to measure actual power output (at source)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Measured power in system units (dBm or mW)</p>
@@ -290,24 +300,24 @@ While the LD light is blinking, communication is not possible.</p>
 
 <dl class="method">
 <dt id="lightSource.TSL510.get_range_power">
-<code class="sig-name descname">get_range_power</code><span class="sig-paren">(</span><em class="sig-param">) -&gt; (&lt;class 'float'&gt;</em>, <em class="sig-param">&lt;class 'float'&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#lightSource.TSL510.get_range_power" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_range_power</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Tuple[float, float]<a class="headerlink" href="#lightSource.TSL510.get_range_power" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gives a range of power. I don’t know what this means: maybe attainable power
 range or stable power range? May be constant or vary w/
 temperature, wavelength, etc.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>a 2 element tuple of floats (min, max)</p>
+<dd class="field-odd"><p>lower and upper bound of power output in system units (dBm or mW) in tuple (min, max)</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="lightSource.TSL510.get_range_wavelength">
-<code class="sig-name descname">get_range_wavelength</code><span class="sig-paren">(</span><em class="sig-param">) -&gt; (&lt;class 'float'&gt;</em>, <em class="sig-param">&lt;class 'float'&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#lightSource.TSL510.get_range_wavelength" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_range_wavelength</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Tuple[float, float]<a class="headerlink" href="#lightSource.TSL510.get_range_wavelength" title="Permalink to this definition">¶</a></dt>
 <dd><p>Not well documented function (see get_range_power)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>a 2 element tuple of floats (min, max)</p>
+<dd class="field-odd"><p>a 2 element tuple of color range in system units (nanometers or THz) in tuple (min, max)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -328,18 +338,18 @@ temperature, wavelength, etc.</p>
 <dd class="field-odd"><p><strong>color</strong> – The color of light coming out of the laser. Units are either nanometers or THz,
 depending on what has been set beforehand.</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="lightSource.TSL510.set_power">
 <code class="sig-name descname">set_power</code><span class="sig-paren">(</span><em class="sig-param">power: float</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#lightSource.TSL510.set_power" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets laser power in units set beforehand
-:param power: Power in either dBm or mW.
-:return:</p>
+<dd><p>Sets laser power in units set beforehand</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>power</strong> – Output laser power in either dBm or mW.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -349,9 +359,6 @@ depending on what has been set beforehand.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>value</strong> – If false, the power units are dBm. If true, mW.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
 </dd>
 </dl>
 </dd></dl>
@@ -366,9 +373,6 @@ Raises exception if num is out of range</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>unit</strong> – If unit is false, the unit is set to nanometers. If true, TeraHertz</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
 </dl>
 </dd></dl>
 
@@ -376,8 +380,7 @@ Raises exception if num is out of range</p>
 <dt id="lightSource.TSL510.status">
 <code class="sig-name descname">status</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#lightSource.TSL510.status" title="Permalink to this definition">¶</a></dt>
 <dd><p>Queries the device and returns some, but not all, human readable status
-values for general information and debugging purposes
-:return:</p>
+values for general information and debugging purposes</p>
 </dd></dl>
 
 </dd></dl>

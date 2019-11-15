@@ -25,6 +25,7 @@ author = 'James Whitehead'
 release = '0.0.1'
 
 master_doc = 'index'
+autoclass_content = 'both'
 
 # -- General configuration ---------------------------------------------------
 

@@ -54,7 +54,7 @@ class DAC8568:
         self._spi.write(buffer)
 
     def internal_reference_on(self) -> None:
-        """Turns the internal reference on (2.5V). There should be not external reference connected when this occurs
+        """Turns the internal reference on (2.5V). There should be no external reference connected when this occurs
         or it may damage the board"""
         self._write(DAC8568.to_bytes(0x090A0000))
 
