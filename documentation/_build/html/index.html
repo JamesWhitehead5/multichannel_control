@@ -272,15 +272,11 @@ voltage</p></li>
 <dt id="lightSource.TSL510">
 <em class="property">class </em><code class="sig-prename descclassname">lightSource.</code><code class="sig-name descname">TSL510</code><a class="headerlink" href="#lightSource.TSL510" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class provides a simple interface with the TSL-510 Laser. It creates an
-object that consists of setters and getters for the source.
-Most methods in  Laser require the Laser Diode to be turned on in order to work.
+object that consists of setters and getters.
+Most methods require the Laser Diode to be turned on in order to work.
 After turning the power on or the LD output off, it is recommended that you
 wait at least 30 seconds before turning on LD output.
-While the LD light is blinking, communication is not possible.
-Additional methods should be added in the future to allow for greater
-functionality
-Methods with a preceding ‘_’ are considered private and should not be used
-outside of the class since they may be depreciated or modified in the future</p>
+While the LD light is blinking, communication is not possible.</p>
 <dl class="method">
 <dt id="lightSource.TSL510.get_power_true">
 <code class="sig-name descname">get_power_true</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#lightSource.TSL510.get_power_true" title="Permalink to this definition">¶</a></dt>
@@ -308,9 +304,12 @@ temperature, wavelength, etc.</p>
 <dl class="method">
 <dt id="lightSource.TSL510.get_range_wavelength">
 <code class="sig-name descname">get_range_wavelength</code><span class="sig-paren">(</span><em class="sig-param">) -&gt; (&lt;class 'float'&gt;</em>, <em class="sig-param">&lt;class 'float'&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#lightSource.TSL510.get_range_wavelength" title="Permalink to this definition">¶</a></dt>
-<dd><p>Not well documented function (see get_range_power)
-returns
-:return: a 2 element tuple of floats (min, max)</p>
+<dd><p>Not well documented function (see get_range_power)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a 2 element tuple of floats (min, max)</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
