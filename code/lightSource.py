@@ -5,15 +5,11 @@ from typing import List, Tuple
 class TSL510:
     """
     This class provides a simple interface with the TSL-510 Laser. It creates an
-    object that consists of setters and getters for the source.
-    Most methods in  Laser require the Laser Diode to be turned on in order to work.
+    object that consists of setters and getters.
+    Most methods require the Laser Diode to be turned on in order to work.
     After turning the power on or the LD output off, it is recommended that you
     wait at least 30 seconds before turning on LD output.
     While the LD light is blinking, communication is not possible.
-    Additional methods should be added in the future to allow for greater
-    functionality
-    Methods with a preceding '_' are considered private and should not be used
-    outside of the class since they may be depreciated or modified in the future
     """
     inst = None  # VISA resource manager instance for Laser
 
@@ -126,7 +122,7 @@ class TSL510:
     def get_range_wavelength(self) -> (float, float):
         """
         Not well documented function (see get_range_power)
-        returns
+
         :return: a 2 element tuple of floats (min, max)
         """
         return float(self.inst.query(':WAV:MIN?')), float(self.inst.query(':WAV:MAX?'))

@@ -1,9 +1,9 @@
-.. Thermal tuning control for integrated optical cavities documentation master file, created by
+.. Thermal tuning control documentation master file, created by
    sphinx-quickstart on Thu Nov 14 09:20:15 2019.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Thermal tuning control for integrated optical cavities's documentation!
+Welcome to Thermal tuning control's documentation!
 ==================================================================================
 
 .. toctree::
