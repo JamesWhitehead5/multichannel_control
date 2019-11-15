@@ -1,7 +1,3 @@
-import visa, time, math, sys
-import numpy as np
-from typing import List, Tuple
-
 class TSL510:
     """
     This class provides a simple interface with the TSL-510 Laser. It creates an
@@ -14,6 +10,8 @@ class TSL510:
     inst = None  # VISA resource manager instance for Laser
 
     def __init__(self):
+        import visa
+
         """Constructor finds and connects to the VISA resource with name in ID string
         Prints confirmation to STDOUT.
         Raises exception if cannot connect
