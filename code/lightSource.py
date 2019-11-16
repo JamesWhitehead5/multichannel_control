@@ -13,10 +13,9 @@ class TSL510:
 
     def __init__(self):
         """
-        Constructor finds and connects to the VISA resource with name in ID string
+        Constructor finds and connects to the VISA resource with name in ID string.
         Prints confirmation to STDOUT.
-        Raises exception if cannot connect
-        :raises: RuntimeError
+        :raises: RuntimeError if cannot connect to the laser
         """
 
         import visa
@@ -42,9 +41,9 @@ class TSL510:
     def status(self) -> str:
         """
         Queries the device and returns some, but not all, human readable status
-        values for general information and debugging purposes
+        values for general information and debugging purposes.
 
-        :return: A composite string of various status indicators
+        :return: A composite string of various status indicators.
         """
 
         str = ""
@@ -59,9 +58,9 @@ class TSL510:
     @staticmethod
     def _bool_to_int(value: bool) -> int:
         """
-        Maps a boolean false to an integer 0 and a boolean tru to an integer 1
+        Maps a boolean false to the integer '0' and a boolean true to the integer '1'.
         :param value:
-        :return:
+        :return: The value 0 or 1
         """
         if value:
             return int(1)
@@ -71,7 +70,7 @@ class TSL510:
     def set_wavelength_unit(self, unit: bool) -> None:
         """
         Wavelength field can either represent the wavelength(in nm) or the
-        frequency(in THz). Parameter num can either be 0 or 1.(0:nm, 1:THz)
+        frequency(in THz). Parameter num can either be 0 or 1 (0:nm, 1:THz).
         Raises exception if num is out of range
 
         :param unit: If unit is false, the unit is set to nanometers. If true, TeraHertz
@@ -91,7 +90,7 @@ class TSL510:
         """
         Sets the power unit for the laser. Power field can have units dBm (dBmW) or just mW.
 
-        :param value: If false, the power units are dBm. If true, mW.
+        :param value: Sets the power unit to dBm if false, mW if true.
         """
         self._inst.write(':POW:UNIT ' + str(self._bool_to_int(value)))
 
@@ -121,7 +120,7 @@ class TSL510:
         """
         return float(self._inst.query(':POW:LEV:MIN?')), float(self._inst.query(':POW:LEV:MAX?'))
 
-    def get_range_wavelength(self) -> Tuple[float, float]:
+    def get_range_color(self) -> Tuple[float, float]:
         """
         Not well documented function (see get_range_power)
 
@@ -132,6 +131,5 @@ class TSL510:
     def ld_off(self) -> None:
         """
         Turns off the Laser Diode (LD)
-        :return:
         """
         self._inst.write(':POW:STAT 0')
