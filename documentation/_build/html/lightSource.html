@@ -1,0 +1,320 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Light source module &mdash; Thermal tuning control 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Power supply module" href="powerSupply.html" />
+    <link rel="prev" title="Welcome to Thermal tuning control’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Thermal tuning control
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Light source module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="powerSupply.html">Power supply module</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Thermal tuning control</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Light source module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/lightSource.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="light-source-module">
+<h1>Light source module<a class="headerlink" href="#light-source-module" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-lightSource"></span><dl class="class">
+<dt id="lightSource.TSL510">
+<em class="property">class </em><code class="sig-prename descclassname">lightSource.</code><code class="sig-name descname">TSL510</code><a class="headerlink" href="#lightSource.TSL510" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class provides a simple interface with the TSL-510 Laser. It creates an
+object that consists of setters and getters.
+Most methods require the Laser Diode to be turned on in order to work.
+After turning the power on or the LD output off, it is recommended that you
+wait at least 30 seconds before turning on LD output.
+While the LD light is blinking, communication is not possible.</p>
+<p>Constructor finds and connects to the VISA resource with name in ID string
+Prints confirmation to STDOUT.
+Raises exception if cannot connect
+:raises: RuntimeError</p>
+<dl class="method">
+<dt id="lightSource.TSL510.get_power_true">
+<code class="sig-name descname">get_power_true</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#lightSource.TSL510.get_power_true" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses power meter inside of laser to measure actual power output (at source)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Measured power in system units (dBm or mW)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="lightSource.TSL510.get_range_power">
+<code class="sig-name descname">get_range_power</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Tuple[float, float]<a class="headerlink" href="#lightSource.TSL510.get_range_power" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gives a range of power. I don’t know what this means: maybe attainable power
+range or stable power range? May be constant or vary w/
+temperature, wavelength, etc.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>lower and upper bound of power output in system units (dBm or mW) in tuple (min, max)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="lightSource.TSL510.get_range_wavelength">
+<code class="sig-name descname">get_range_wavelength</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Tuple[float, float]<a class="headerlink" href="#lightSource.TSL510.get_range_wavelength" title="Permalink to this definition">¶</a></dt>
+<dd><p>Not well documented function (see get_range_power)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a 2 element tuple of color range in system units (nanometers or THz) in tuple (min, max)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="lightSource.TSL510.ld_off">
+<code class="sig-name descname">ld_off</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#lightSource.TSL510.ld_off" title="Permalink to this definition">¶</a></dt>
+<dd><p>Turns off the Laser Diode (LD)
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lightSource.TSL510.set_color">
+<code class="sig-name descname">set_color</code><span class="sig-paren">(</span><em class="sig-param">color: float</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#lightSource.TSL510.set_color" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the color of light coming out of the laser.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>color</strong> – The color of light coming out of the laser. Units are either nanometers or THz,
+depending on what has been set beforehand.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="lightSource.TSL510.set_power">
+<code class="sig-name descname">set_power</code><span class="sig-paren">(</span><em class="sig-param">power: float</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#lightSource.TSL510.set_power" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets laser power in units set beforehand</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>power</strong> – Output laser power in either dBm or mW.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="lightSource.TSL510.set_power_unit">
+<code class="sig-name descname">set_power_unit</code><span class="sig-paren">(</span><em class="sig-param">value: bool</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#lightSource.TSL510.set_power_unit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the power unit for the laser. Power field can have units dBm (dBmW) or just mW.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> – If false, the power units are dBm. If true, mW.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="lightSource.TSL510.set_wavelength_unit">
+<code class="sig-name descname">set_wavelength_unit</code><span class="sig-paren">(</span><em class="sig-param">unit: bool</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#lightSource.TSL510.set_wavelength_unit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wavelength field can either represent the wavelength(in nm) or the
+frequency(in THz). Parameter num can either be 0 or 1.(0:nm, 1:THz)
+Raises exception if num is out of range</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>unit</strong> – If unit is false, the unit is set to nanometers. If true, TeraHertz</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="lightSource.TSL510.status">
+<code class="sig-name descname">status</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#lightSource.TSL510.status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Queries the device and returns some, but not all, human readable status
+values for general information and debugging purposes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A composite string of various status indicators</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="powerSupply.html" class="btn btn-neutral float-right" title="Power supply module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to Thermal tuning control’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, James Whitehead
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

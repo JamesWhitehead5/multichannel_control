@@ -10,11 +10,8 @@ Welcome to Thermal tuning control's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-.. automodule:: powerSource
-   :members:
-
-.. automodule:: lightSource
-   :members:
+   lightSource
+   powerSupply
 
 
 

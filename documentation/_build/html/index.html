@@ -34,7 +34,8 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Light source module" href="lightSource.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -78,12 +79,12 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">Welcome to Thermal tuning control’s documentation!</a></li>
-<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="lightSource.html">Light source module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="powerSupply.html">Power supply module</a></li>
 </ul>
-</div>
+
             
           
         </div>
@@ -149,242 +150,12 @@
   <div class="section" id="welcome-to-thermal-tuning-control-s-documentation">
 <h1>Welcome to Thermal tuning control’s documentation!<a class="headerlink" href="#welcome-to-thermal-tuning-control-s-documentation" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="lightSource.html">Light source module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="powerSupply.html">Power supply module</a></li>
+</ul>
 </div>
-<span class="target" id="module-powerSource"></span><dl class="class">
-<dt id="powerSource.DAC8568">
-<em class="property">class </em><code class="sig-prename descclassname">powerSource.</code><code class="sig-name descname">DAC8568</code><span class="sig-paren">(</span><em class="sig-param">baud_rate: int</em><span class="sig-paren">)</span><a class="headerlink" href="#powerSource.DAC8568" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class to interface with the DAC8568 8 channel digital-to-analog converter via the FT232H controller.</p>
-<p>Initializes the connection with the microcontroller board. Takes control of pins D0, D1, D3 on the board.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>baud_rate</strong> – Rate that data is sent from the controller to the DAC. The maximum rate for the DAC is
-50MHz but the interface board can’t get that fast.</p>
-</dd>
-</dl>
-<dl class="method">
-<dt id="powerSource.DAC8568.clear_all_to_full">
-<code class="sig-name descname">clear_all_to_full</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#powerSource.DAC8568.clear_all_to_full" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets all output registers to their maximum value</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="powerSource.DAC8568.clear_all_to_mid">
-<code class="sig-name descname">clear_all_to_mid</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#powerSource.DAC8568.clear_all_to_mid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets all output registers to half way between 0 and maximum</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="powerSource.DAC8568.clear_all_to_zero">
-<code class="sig-name descname">clear_all_to_zero</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#powerSource.DAC8568.clear_all_to_zero" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets all outputs registers to 0</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="powerSource.DAC8568.internal_reference_on">
-<code class="sig-name descname">internal_reference_on</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#powerSource.DAC8568.internal_reference_on" title="Permalink to this definition">¶</a></dt>
-<dd><p>Turns the internal reference on (2.5V). There should be no external reference connected when this occurs
-or it may damage the board</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="powerSource.DAC8568.power_up_dac">
-<code class="sig-name descname">power_up_dac</code><span class="sig-paren">(</span><em class="sig-param">channels: list</em><span class="sig-paren">)</span><a class="headerlink" href="#powerSource.DAC8568.power_up_dac" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="powerSource.DAC8568.software_reset">
-<code class="sig-name descname">software_reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#powerSource.DAC8568.software_reset" title="Permalink to this definition">¶</a></dt>
-<dd><p>Resets the software in the DAC</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="powerSource.DAC8568.to_bytes">
-<em class="property">static </em><code class="sig-name descname">to_bytes</code><span class="sig-paren">(</span><em class="sig-param">word: int</em><span class="sig-paren">)</span> &#x2192; bytearray<a class="headerlink" href="#powerSource.DAC8568.to_bytes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts an integer to an array of 8-bit bytes with length 4 that can be processed by busio.SPI write
-for the Ti DA8568</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>word</strong> – Integer with 32 bits. Raises assertion error when more significant bits are present</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A length 4 array of 8-bits bytes that represent the value of word</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="powerSource.DAC8568.update_channel">
-<code class="sig-name descname">update_channel</code><span class="sig-paren">(</span><em class="sig-param">channel: str</em><span class="sig-paren">)</span><a class="headerlink" href="#powerSource.DAC8568.update_channel" title="Permalink to this definition">¶</a></dt>
-<dd><p>Takes the value in the buffer for the selected channel and loads it</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>channel</strong> – The character that represents the output that you want to change. Ex. “A” or “H”.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="powerSource.DAC8568.write_and_update">
-<code class="sig-name descname">write_and_update</code><span class="sig-paren">(</span><em class="sig-param">channel: str</em>, <em class="sig-param">value: float</em><span class="sig-paren">)</span><a class="headerlink" href="#powerSource.DAC8568.write_and_update" title="Permalink to this definition">¶</a></dt>
-<dd><p>Loads a value to the buffer and update the output for the selected channel</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>channel</strong> – The character that represents the output that you want to change. Ex. “A” or “H”.</p></li>
-<li><p><strong>value</strong> – A value between 0 (inclusive) and 1(inclusive) that outputs a value proportional to the reference
-voltage</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="powerSource.DAC8568.write_and_update_all">
-<code class="sig-name descname">write_and_update_all</code><span class="sig-paren">(</span><em class="sig-param">channel: str</em>, <em class="sig-param">value: float</em><span class="sig-paren">)</span><a class="headerlink" href="#powerSource.DAC8568.write_and_update_all" title="Permalink to this definition">¶</a></dt>
-<dd><p>Loads a value to the buffer and update the outputs for all channels</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>channel</strong> – The character that represents the output that you want to change. Ex. “A” or “H”.</p></li>
-<li><p><strong>value</strong> – A value between 0 (inclusive) and 1(inclusive) that outputs a value proportional to the reference
-voltage</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="powerSource.DAC8568.write_to_ldac_register">
-<code class="sig-name descname">write_to_ldac_register</code><span class="sig-paren">(</span><em class="sig-param">channels: list</em><span class="sig-paren">)</span><a class="headerlink" href="#powerSource.DAC8568.write_to_ldac_register" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="powerSource.DAC8568.write_to_register">
-<code class="sig-name descname">write_to_register</code><span class="sig-paren">(</span><em class="sig-param">channel: str</em>, <em class="sig-param">value: float</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#powerSource.DAC8568.write_to_register" title="Permalink to this definition">¶</a></dt>
-<dd><p>Loads a value to the buffer but doesn’t update the output</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>channel</strong> – The character that represents the output that you want to change. Ex. “A” or “H”.</p></li>
-<li><p><strong>value</strong> – A value between 0 (inclusive) and 1(inclusive) that outputs a value proportional to the reference
-voltage</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<span class="target" id="module-lightSource"></span><dl class="class">
-<dt id="lightSource.TSL510">
-<em class="property">class </em><code class="sig-prename descclassname">lightSource.</code><code class="sig-name descname">TSL510</code><a class="headerlink" href="#lightSource.TSL510" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class provides a simple interface with the TSL-510 Laser. It creates an
-object that consists of setters and getters.
-Most methods require the Laser Diode to be turned on in order to work.
-After turning the power on or the LD output off, it is recommended that you
-wait at least 30 seconds before turning on LD output.
-While the LD light is blinking, communication is not possible.</p>
-<p>Constructor finds and connects to the VISA resource with name in ID string
-Prints confirmation to STDOUT.
-Raises exception if cannot connect</p>
-<dl class="method">
-<dt id="lightSource.TSL510.get_power_true">
-<code class="sig-name descname">get_power_true</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#lightSource.TSL510.get_power_true" title="Permalink to this definition">¶</a></dt>
-<dd><p>Uses power meter inside of laser to measure actual power output (at source)</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Measured power in system units (dBm or mW)</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="lightSource.TSL510.get_range_power">
-<code class="sig-name descname">get_range_power</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Tuple[float, float]<a class="headerlink" href="#lightSource.TSL510.get_range_power" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gives a range of power. I don’t know what this means: maybe attainable power
-range or stable power range? May be constant or vary w/
-temperature, wavelength, etc.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>lower and upper bound of power output in system units (dBm or mW) in tuple (min, max)</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="lightSource.TSL510.get_range_wavelength">
-<code class="sig-name descname">get_range_wavelength</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Tuple[float, float]<a class="headerlink" href="#lightSource.TSL510.get_range_wavelength" title="Permalink to this definition">¶</a></dt>
-<dd><p>Not well documented function (see get_range_power)</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>a 2 element tuple of color range in system units (nanometers or THz) in tuple (min, max)</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="lightSource.TSL510.ld_off">
-<code class="sig-name descname">ld_off</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#lightSource.TSL510.ld_off" title="Permalink to this definition">¶</a></dt>
-<dd><p>Turns off the Laser Diode (LD)
-:return:</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="lightSource.TSL510.set_color">
-<code class="sig-name descname">set_color</code><span class="sig-paren">(</span><em class="sig-param">color: float</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#lightSource.TSL510.set_color" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets the color of light coming out of the laser.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>color</strong> – The color of light coming out of the laser. Units are either nanometers or THz,
-depending on what has been set beforehand.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="lightSource.TSL510.set_power">
-<code class="sig-name descname">set_power</code><span class="sig-paren">(</span><em class="sig-param">power: float</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#lightSource.TSL510.set_power" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets laser power in units set beforehand</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>power</strong> – Output laser power in either dBm or mW.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="lightSource.TSL510.set_power_unit">
-<code class="sig-name descname">set_power_unit</code><span class="sig-paren">(</span><em class="sig-param">value: bool</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#lightSource.TSL510.set_power_unit" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets the power unit for the laser. Power field can have units dBm (dBmW) or just mW.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>value</strong> – If false, the power units are dBm. If true, mW.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="lightSource.TSL510.set_wavelength_unit">
-<code class="sig-name descname">set_wavelength_unit</code><span class="sig-paren">(</span><em class="sig-param">unit: bool</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#lightSource.TSL510.set_wavelength_unit" title="Permalink to this definition">¶</a></dt>
-<dd><p>Wavelength field can either represent the wavelength(in nm) or the
-frequency(in THz). Parameter num can either be 0 or 1.(0:nm, 1:THz)
-Raises exception if num is out of range</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>unit</strong> – If unit is false, the unit is set to nanometers. If true, TeraHertz</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="lightSource.TSL510.status">
-<code class="sig-name descname">status</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#lightSource.TSL510.status" title="Permalink to this definition">¶</a></dt>
-<dd><p>Queries the device and returns some, but not all, human readable status
-values for general information and debugging purposes</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
@@ -400,6 +171,13 @@ values for general information and debugging purposes</p>
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="lightSource.html" class="btn btn-neutral float-right" title="Light source module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
   
 
   <hr/>

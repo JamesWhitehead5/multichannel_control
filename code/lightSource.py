@@ -16,6 +16,7 @@ class TSL510:
         Constructor finds and connects to the VISA resource with name in ID string
         Prints confirmation to STDOUT.
         Raises exception if cannot connect
+        :raises: RuntimeError
         """
 
         import visa
@@ -38,10 +39,12 @@ class TSL510:
             raise RuntimeError("Target resource {} cannot be found in the VISA resource manager".format(target))
         print("Connected to " + self._inst.query('*IDN?'))
 
-    def status(self) -> None:
+    def status(self) -> str:
         """
         Queries the device and returns some, but not all, human readable status
         values for general information and debugging purposes
+
+        :return: A composite string of various status indicators
         """
 
         str = ""

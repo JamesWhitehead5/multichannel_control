@@ -1,0 +1,367 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Power supply module &mdash; Thermal tuning control 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Light source module" href="lightSource.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Thermal tuning control
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="lightSource.html">Light source module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Power supply module</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Thermal tuning control</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Power supply module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/powerSupply.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-powerSource">
+<span id="power-supply-module"></span><h1>Power supply module<a class="headerlink" href="#module-powerSource" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="powerSource.DAC8568">
+<em class="property">class </em><code class="sig-prename descclassname">powerSource.</code><code class="sig-name descname">DAC8568</code><span class="sig-paren">(</span><em class="sig-param">baud_rate: int</em><span class="sig-paren">)</span><a class="headerlink" href="#powerSource.DAC8568" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to interface with the DAC8568 8 channel digital-to-analog converter via the FT232H controller.</p>
+<p>Initializes the connection with the microcontroller board. Takes control of pins D0, D1, D3 on the board.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>baud_rate</strong> – Rate that data is sent from the controller to the DAC. The maximum rate for the DAC is
+50MHz but the interface board can’t get that fast.</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="powerSource.DAC8568.clear_all_to_full">
+<code class="sig-name descname">clear_all_to_full</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#powerSource.DAC8568.clear_all_to_full" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets all output registers to their maximum value</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="powerSource.DAC8568.clear_all_to_mid">
+<code class="sig-name descname">clear_all_to_mid</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#powerSource.DAC8568.clear_all_to_mid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets all output registers to half way between 0 and maximum</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="powerSource.DAC8568.clear_all_to_zero">
+<code class="sig-name descname">clear_all_to_zero</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#powerSource.DAC8568.clear_all_to_zero" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets all outputs registers to 0</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="powerSource.DAC8568.internal_reference_on">
+<code class="sig-name descname">internal_reference_on</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#powerSource.DAC8568.internal_reference_on" title="Permalink to this definition">¶</a></dt>
+<dd><p>Turns the internal reference on (2.5V). There should be no external reference connected when this occurs
+or it may damage the board</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="powerSource.DAC8568.power_up_dac">
+<code class="sig-name descname">power_up_dac</code><span class="sig-paren">(</span><em class="sig-param">channels: list</em><span class="sig-paren">)</span><a class="headerlink" href="#powerSource.DAC8568.power_up_dac" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="powerSource.DAC8568.software_reset">
+<code class="sig-name descname">software_reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#powerSource.DAC8568.software_reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resets the software in the DAC</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="powerSource.DAC8568.to_bytes">
+<em class="property">static </em><code class="sig-name descname">to_bytes</code><span class="sig-paren">(</span><em class="sig-param">word: int</em><span class="sig-paren">)</span> &#x2192; bytearray<a class="headerlink" href="#powerSource.DAC8568.to_bytes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts an integer to an array of 8-bit bytes with length 4 that can be processed by busio.SPI write
+for the Ti DA8568</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>word</strong> – Integer with 32 bits. Raises assertion error when more significant bits are present</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A length 4 array of 8-bits bytes that represent the value of word</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="powerSource.DAC8568.update_channel">
+<code class="sig-name descname">update_channel</code><span class="sig-paren">(</span><em class="sig-param">channel: str</em><span class="sig-paren">)</span><a class="headerlink" href="#powerSource.DAC8568.update_channel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes the value in the buffer for the selected channel and loads it</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>channel</strong> – The character that represents the output that you want to change. Ex. “A” or “H”.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="powerSource.DAC8568.write_and_update">
+<code class="sig-name descname">write_and_update</code><span class="sig-paren">(</span><em class="sig-param">channel: str</em>, <em class="sig-param">value: float</em><span class="sig-paren">)</span><a class="headerlink" href="#powerSource.DAC8568.write_and_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads a value to the buffer and update the output for the selected channel</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>channel</strong> – The character that represents the output that you want to change. Ex. “A” or “H”.</p></li>
+<li><p><strong>value</strong> – A value between 0 (inclusive) and 1(inclusive) that outputs a value proportional to the reference
+voltage</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="powerSource.DAC8568.write_and_update_all">
+<code class="sig-name descname">write_and_update_all</code><span class="sig-paren">(</span><em class="sig-param">channel: str</em>, <em class="sig-param">value: float</em><span class="sig-paren">)</span><a class="headerlink" href="#powerSource.DAC8568.write_and_update_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads a value to the buffer and update the outputs for all channels</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>channel</strong> – The character that represents the output that you want to change. Ex. “A” or “H”.</p></li>
+<li><p><strong>value</strong> – A value between 0 (inclusive) and 1(inclusive) that outputs a value proportional to the reference
+voltage</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="powerSource.DAC8568.write_to_ldac_register">
+<code class="sig-name descname">write_to_ldac_register</code><span class="sig-paren">(</span><em class="sig-param">channels: list</em><span class="sig-paren">)</span><a class="headerlink" href="#powerSource.DAC8568.write_to_ldac_register" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="powerSource.DAC8568.write_to_register">
+<code class="sig-name descname">write_to_register</code><span class="sig-paren">(</span><em class="sig-param">channel: str</em>, <em class="sig-param">value: float</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#powerSource.DAC8568.write_to_register" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads a value to the buffer but doesn’t update the output</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>channel</strong> – The character that represents the output that you want to change. Ex. “A” or “H”.</p></li>
+<li><p><strong>value</strong> – A value between 0 (inclusive) and 1(inclusive) that outputs a value proportional to the reference
+voltage</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">code.powerSource</span> <span class="kn">import</span> <span class="n">DAC8568</span>
+
+<span class="k">def</span> <span class="nf">generate_points</span><span class="p">():</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="o">/</span><span class="n">n</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">/</span><span class="mf">2.</span> <span class="o">+</span> <span class="mf">0.5</span>
+
+    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span>
+
+<span class="k">def</span> <span class="nf">smooth_point</span><span class="p">():</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">generate_points</span><span class="p">()</span>
+
+    <span class="n">dac</span> <span class="o">=</span> <span class="n">DAC8568</span><span class="p">(</span><span class="n">baud_rate</span><span class="o">=</span><span class="mi">100000</span><span class="p">)</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">Y</span><span class="p">:</span>
+            <span class="n">dac</span><span class="o">.</span><span class="n">write_and_update</span><span class="p">(</span><span class="n">channel</span><span class="o">=</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+
+<span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span><span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">smooth_point</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="lightSource.html" class="btn btn-neutral float-left" title="Light source module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, James Whitehead
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
