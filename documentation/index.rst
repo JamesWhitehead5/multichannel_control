@@ -12,7 +12,7 @@ Welcome to Thermal tuning control's documentation!
 
    lightSource
    powerSupply
-
+   opticalPowerMeter
 
 
 Indices and tables
