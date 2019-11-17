@@ -13,7 +13,8 @@ class KEYSIGHT81634B:
         """
         Finds and connects to the VISA resource with name in ID string.
         Prints confirmation to STDOUT.
-        :raises: RuntimeError if cannot connect to the meter
+
+        :raise: RuntimeError if cannot connect to the meter
         """
         import visa
 
@@ -43,14 +44,14 @@ class KEYSIGHT81634B:
 
         return self._inst.query('*IDN?')
 
-    def get_power(self):
+    def get_power(self) -> float:
         """
-        :READ[n][:CHANnel[m]][:SCALar]: POWer[:DC]?
         Reads the current power meter value. It provides its own software triggering and does not need a triggering command.
 
-        :return: The current power meter reading as a float value in dBm, W or dB.
+        :return: The current power meter reading as a float value in dBm, W, or dB.
         """
 
+        #:READ[n][:CHANnel[m]][:SCALar]: POWer[:DC]?
         return float(self._inst.query(":READ:POW?"))
 
     def set_power_unit(self, power_unit: PowerUnit) -> None:
