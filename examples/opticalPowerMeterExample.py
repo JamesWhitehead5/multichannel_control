@@ -1,9 +1,10 @@
 import sys
+
 sys.path.insert(1, '../code/')
 from tools import PowerUnit
 from opticalPowerMeter import KEYSIGHT81634B
 
-if __name__=='__main__':
+if __name__ == '__main__':
     meter = KEYSIGHT81634B();
 
     meter.set_power_unit(PowerUnit.W)

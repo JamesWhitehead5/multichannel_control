@@ -1,5 +1,7 @@
 import numpy as np
-from code.powerSource import DAC8568
+import sys
+sys.path.insert(1, '../code/')
+from powerSource import DAC8568
 
 def generate_points():
     n = 1000
