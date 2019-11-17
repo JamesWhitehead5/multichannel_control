@@ -1,7 +1,5 @@
 #Demo to show smooth output from the DAC
 
-
-
 import numpy as np
 from code.powerSource import DAC8568
 
