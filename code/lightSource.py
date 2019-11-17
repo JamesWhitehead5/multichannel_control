@@ -28,7 +28,7 @@ class TSL510:
         for dev in rm.list_resources():
             try:
                 inst = rm.open_resource(dev)
-                name = inst.query('*IDN?')
+                name = inst.query('*IDN?') #the target device is "SANTEC,TSL-510,14040011,0002.0085"
                 if target in name:
                     self._inst = inst
             except:
